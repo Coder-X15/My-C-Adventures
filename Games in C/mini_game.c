@@ -1,5 +1,6 @@
 # include <stdio.h>
 # include <stdlib.h>
+// code updated on 18/10/2023
 // creating my first game in C!!
 // just a game with a raw CMD-like interface (fok it, BS!! I wished to have some GUI)
 
@@ -53,22 +54,31 @@ int main(){
 			}
 			printf("\n");
 		}
-		printf("\n You're currently at:(%d,%d)",pos[0],pos[1]);
-		printf("\n Previously you were at:(%d,%d)",prev[0],prev[1]);
+		printf("\n Press W for up, S for down, A for left and D for right.");
+		printf("\n Previously at: (%d, %d))",prev[0],prev[1]);
+		printf("\n Currently at: (%d, %d)",pos[0],pos[1]);
 		keypress = getch();
 		prev[0] = pos[0]; prev[1] = pos[1]; // keeping track of the previous position
 		switch(keypress){
 			case 'w':
-				--pos[0]; // going up = current - 1 on y - axis
+				if(pos[0] != 0 && map[pos[0] - 1][pos[1]] != '|'){
+					--pos[0]; // going up = current - 1 on y - axis
+				}
 				break;
 			case 'a':
-				--pos[1]; // going left = current - 1 on x axis
+				if(pos[1] != 0 && map[pos[0]][pos[1]-1] != '|'){
+					--pos[1]; // going left = current - 1 on x axis
+				}
 				break;
 			case 's':
-				++pos[0]; // going down = current + 1 on y axis
+				if(pos[0]!=4 && map[pos[0]+1][pos[1]] != '|'){
+					++pos[0]; // going down = current + 1 on y axis
+				}
 				break;
 			case 'd':
-				++pos[1]; // going right = current + 1 on x axis
+				if(pos[1] != 4 && map[pos[0]][pos[1]+1] != '|'){
+					++pos[1]; // going right = current + 1 on x axis
+				}
 				break;
 			default:
 				goto game_loop;
@@ -92,6 +102,5 @@ int main(){
 			goto game_loop;
 		}
 }
-
 
 
